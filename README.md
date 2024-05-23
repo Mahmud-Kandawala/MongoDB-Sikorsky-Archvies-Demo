@@ -1,1 +1,0 @@
-# MongoDB-Sikorsky-Archvies-Demo

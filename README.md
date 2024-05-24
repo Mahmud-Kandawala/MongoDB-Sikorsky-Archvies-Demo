@@ -69,10 +69,10 @@ The script includes data validation to ensure consistency:
 1. **Ensure MongoDB is running:**
    ```bash
    mongod 
-2.**Run the Script:**
+2. **Run the Script:**
    ```bash
    python setup_database.py /path/to/root_directory
-3.**Script Output:**
+3. **Script Output:**
 The script logs each directory and file it processes.
 It prints messages indicating successful insertion of data or any errors encountered.
 
@@ -86,25 +86,19 @@ We welcome contributions! Please follow these steps to contribute:
    ```bash
    git clone https://github.com/yourusername/MongoDB-Sikorsky-Archives-Demo.git
    cd MongoDB-Sikorsky-Archives-Demo
- 3. **Create a New Branch:**
+3. **Create a New Branch:**
    ```bash
    git checkout -b feature/your-feature-name
 4. **Make Your Changes and Commit:**
    ```bash
     git add .
     git commit -m "Add your commit message here"
+
 5. **Push to Your Fork and Submit a Pull Request:**
-  ```bash
+   ```bash
     git push origin feature/your-feature-name
 
 # License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-``` This README is fully detailed and provides all necessary information for users and contributors, including a fully populated Table of Contents. If you need any more assistance, let me know! ```
-
-
-
-
-
-
-
+`This README is fully detailed and provides all necessary information for users and contributors, including a fully populated Table of Contents. If you need any more assistance, let me know! `

@@ -18,10 +18,15 @@ for collection_name in collection_names: # Refer to config.py
     # Update fileLink for each document in the collection
     for document in collection.find():
         filename = document.get('fileLink')
-        if document is not 'NoneType': # AKA 'if fileLink doesn't exist'
+
+        try: 
+            if type(filename) is not 'NoneType': # AKA don't let it through if 'if fileLink doesn't exist'
+                pass
+            else:
+                root, ext = os.path.splitext(filename) # Check if os can split the filename into both its root and file extension. Throws an error if not.
+        except:
+            logging.error("A filename either did not pass the 'has a file extension' or 'has anything in the cell at all' test.")
             pass
-        else:
-            root, ext = os.path.splitext(filename)
 
         if filename and ('No link provided' not in filename):
             # Construct the new path with collection name included

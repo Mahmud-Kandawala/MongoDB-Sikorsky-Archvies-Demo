@@ -2,13 +2,15 @@ from pymongo import MongoClient
 import pandas as pd
 import os
 import warnings
+from config import *
+
+
+# Refer to config.py to see where client connection information went.
+
+
 
 # Suppress specific openpyxl warnings
 warnings.filterwarnings("ignore", category=UserWarning, module='openpyxl')
-
-# Connect to MongoDB
-client = MongoClient('localhost', 27017)
-db = client['sikorsky_archives']
 
 def normalize_date(date_str):
     """Normalize date to month/day/year format."""
@@ -108,4 +110,4 @@ def main(root_directory):
         print(f"Failed to process directory: {e}")
 
 if __name__ == "__main__":
-    main(r'E:\\Hank Sample File - Copy\DATABASE PROJECT\DOWNLOAD FILES')  # Use raw string for the path
+    main(base_path)

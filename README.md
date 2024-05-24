@@ -8,13 +8,10 @@ This project is a demonstration of how to process and import a large dataset of 
 - [Setup Instructions](#setup-instructions)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-  - [Requirements File](#requirements-file)
 - [Script Details](#script-details)
   - [Key Functions](#key-functions)
-  - [Script Workflow](#script-workflow)
 - [Data Validation](#data-validation)
 - [Usage](#usage)
-- [File Link Update Script](#file-link-update-script)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -45,15 +42,6 @@ This project processes a dataset of approximately 40 GB, stored in various Excel
    - Ensure MongoDB is installed and running on your local machine.
    - The default connection string is mongodb://localhost:27017. Update this in the script if necessary.
 
-## Requirements File
-Create a file named requirements.txt with the following content:
-```
-pymongo
-pandas
-openpyxl
-xlrd
-```
-
 ## Script Details 
 The script setup_database.py processes and imports Excel files into MongoDB. It handles both .xls and .xlsx file formats.
 
@@ -66,34 +54,6 @@ The script setup_database.py processes and imports Excel files into MongoDB. It 
 - **validate_data(row)**: Validates and cleans each data row.
 - **process_excel_file(file_path, collection_name)**: Reads and processes an Excel file, then inserts data into MongoDB.
 - **main(root_directory)**: Traverses the root directory, processing each main folder and its Excel files.
-
-### Script Workflow
-
-1) **Connect to MongoDB:**
-
-- The script establishes a connection to the local MongoDB instance using the MongoClient from the pymongo library.
-
-2) **Normalize Data:**
-- Date Normalization: The normalize_date function converts dates to the month/day/year format.
-- NaN Handling: The handle_nan_values function replaces NaN values with None to ensure MongoDB compatibility.
-- Aircraft Model Processing: The process_aircraft_model function splits strings with multiple aircraft models into lists.
-- Comment Preprocessing: The preprocess_comments function strips excess whitespace from comments.
-
-3) **Process Excel Files:**
-
-- Read Excel Files: The script uses pandas to read .xls and .xlsx files.
-- Validate Data: The validate_data function is used to ensure data integrity and consistency for each row.
-- Prepare Documents: The script constructs MongoDB documents from the cleaned and validated data.
-
-4) **Insert Data:**
-
-- The process_excel_file function inserts the prepared documents into the corresponding MongoDB collection.
-- Each main folder in the dataset corresponds to a separate MongoDB collection.
-
-5) **Logging:**
-
-- The script provides detailed logs for each file and directory processed, indicating success or any errors encountered.
-- It prints messages for successful data insertion and any issues that arise during processing.
 
 ## Data Validation
 
@@ -115,9 +75,6 @@ The script includes data validation to ensure consistency:
 3. **Script Output:**
 The script logs each directory and file it processes.
 It prints messages indicating successful insertion of data or any errors encountered.
-
-## File Link Update Script
-The filelink.py script updates the "fileLink" field in all collections to include the actual file path of the Excel files.
 
 ## Contributing
 

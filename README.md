@@ -78,7 +78,7 @@ It prints messages indicating successful insertion of data or any errors encount
 
 ## Contributing
 
-We welcome contributions! Please follow these steps to contribute:
+Please follow these steps to contribute:
 
 1. **Fork the Repository:**
    - Click the "Fork" button at the top right of the repository page.

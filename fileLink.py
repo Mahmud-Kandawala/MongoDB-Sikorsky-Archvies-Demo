@@ -25,7 +25,6 @@ for collection_name in collection_names: # Refer to config.py
             else:
                 root, ext = os.path.splitext(filename) # Check if os can split the filename into both its root and file extension. Throws an error if not.
         except:
-            logging.error("A filename either did not pass the 'has a file extension' or 'has anything in the cell at all' test.")
             pass
 
         if filename and ('No link provided' not in filename):

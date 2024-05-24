@@ -19,7 +19,7 @@ collection_names = [
 ]
 
 # Define the base path where your files are stored
-base_path = r'/Volumes/IISHA DATA SERVER BACK UP/DATABASE PROJECT/DOWNLOAD FILES//'
+base_path = r'/Volumes/IISHA DATA SERVER BACK UP/DATABASE PROJECT/DOWNLOAD FILES/'
 
 # Iterate through each collection
 for collection_name in collection_names:
@@ -30,9 +30,10 @@ for collection_name in collection_names:
     for document in collection.find():
         filename = document.get('fileLink')
         if filename:
-            new_path = base_path + filename  # Construct the new path
+            # Construct the new path with collection name included
+            new_path = base_path + collection_name.replace(' ', '_') + '/' + filename
             collection.update_one({'_id': document['_id']}, {'$set': {'fileLink': new_path}})
-            print(f"Updated fileLink for document ID {document['_id']} in collection {collection_name}")
+            print(f"Updated fileLink for document ID {document['_id']} in collection {collection_name} to {new_path}")
         else:
             print(f"No fileLink found for document ID {document['_id']} in collection {collection_name}")
 

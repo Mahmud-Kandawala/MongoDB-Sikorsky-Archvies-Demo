@@ -1,4 +1,9 @@
+import os
 from pymongo import MongoClient
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Connect to the MongoDB server
 client = MongoClient('mongodb://localhost:27017/')
@@ -19,11 +24,11 @@ collection_names = [
 ]
 
 # Define the base path where your files are stored
-base_path = r'/Volumes/IISHA DATA SERVER BACK UP/DATABASE PROJECT/DOWNLOAD FILES/'
+base_path = r'E:\\Hank Sample File - Copy\DATABASE PROJECT\DOWNLOAD FILES\\'
 
 # Iterate through each collection
 for collection_name in collection_names:
-    print(f"Processing collection: {collection_name}")  # Print collection name
+    logging.info(f"Processing collection: {collection_name}")
     collection = db[collection_name]
 
     # Update fileLink for each document in the collection
@@ -31,11 +36,14 @@ for collection_name in collection_names:
         filename = document.get('fileLink')
         if filename:
             # Construct the new path with collection name included
-            new_path = base_path + collection_name.replace(' ', '_') + '/' + filename
-            collection.update_one({'_id': document['_id']}, {'$set': {'fileLink': new_path}})
-            print(f"Updated fileLink for document ID {document['_id']} in collection {collection_name} to {new_path}")
+            new_path = os.path.join(base_path, collection_name.replace(' ', '_'), filename)
+            try:
+                collection.update_one({'_id': document['_id']}, {'$set': {'fileLink': new_path}})
+                logging.info(f"Updated fileLink for document ID {document['_id']} in collection {collection_name} to {new_path}")
+            except Exception as e:
+                logging.error(f"Failed to update document ID {document['_id']} in collection {collection_name}: {e}")
         else:
-            print(f"No fileLink found for document ID {document['_id']} in collection {collection_name}")
+            logging.warning(f"No fileLink found for document ID {document['_id']} in collection {collection_name}")
 
 # Close the connection to MongoDB
 client.close()

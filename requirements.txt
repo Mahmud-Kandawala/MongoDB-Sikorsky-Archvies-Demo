@@ -1,4 +1,0 @@
-pymongo
-pandas
-openpyxl
-xlrd

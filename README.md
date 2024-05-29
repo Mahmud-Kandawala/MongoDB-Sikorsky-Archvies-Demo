@@ -15,6 +15,10 @@ This project is a demonstration of how to process and import a large dataset of 
 - [Data Validation](#data-validation)
 - [Usage](#usage)
 - [File Link Update Script](#file-link-update-script)
+- [PDF Processing Scripts](#pdf-processing-scripts)
+  - [ExtractPDF.py](#extractpdfpy)
+  - [SearchPDF.py](#searchpdfpy)
+  - [SearchPageNumber.py](#searchpagenumberpy)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -118,6 +122,21 @@ It prints messages indicating successful insertion of data or any errors encount
 
 ## File Link Update Script
 The filelink.py script updates the "fileLink" field in all collections to include the actual file path of the Excel files.
+
+## PDF Processing Scripts
+
+### ExtractPDF.py
+
+This script takes the PDFs from a collection, extracts the text, and uploads the extracted text as a new field in the collection.
+
+### SearchPDF.py
+
+This script allows you to enter keywords or sentences that you want to find from the extracted text.
+
+### SearchPageNumber.py
+
+This script takes a keyword and directly searches through the PDF without having to extract the text first. Both search options are possible because of the file path stored in the database for the `fileLink` field.
+
 
 ## Contributing
 

@@ -26,15 +26,25 @@ db["T01.36 Posters"].find({$or: [
   ]
 }).pretty();
 
+
+
+// An example of an aggregation query to search through the database using the "$Match" operator 
+
+
+ // which Filters the documents to pass only those that match the specified condition.
+db['16mm_Films'].aggregate([{ $match: { aircraftModel: "S-76" } }]).pretty();
+
+
 // Documents Grouped by YearExtract the year from the date field and group documents by year.
 db["T01.09_Flat_Documents"].aggregate([
   { $addFields: { year: { $substr: ["$date", 6, 4] } } },
   { $group: { _id: "$year", count: { $sum: 1 } } }
 ]).pretty();
 
+// Group documents by aircraft model as well as using the "$Unwind operator to deconstruct array fields
+db["T01.09 Flat_Documents"].aggregate([
+  { $unwind: "$aircraftModel" },
+  { $group: { _id: "$aircraftModel", count: { $sum: 1 } } }
+]).pretty();
 
 
-
-// An example of an aggregation query to search through the database using the "$Match" operator 
- // which Filters the documents to pass only those that match the specified condition.
-db['16mm_Films'].aggregate([{ $match: { aircraftModel: "S-76" } }]).pretty();

@@ -21,20 +21,28 @@ for collection_name in collection_names: # Refer to config.py
         filename = document.get('fileLink')
 
         try: # Tries to make the new proposed file path. If it fails, then the file name is null, and would throw an error.
-            new_path = os.path.join(base_path, collection_name.replace(' ', '_'), filename) 
+            new_path = os.path.join(base_path, collection_name, filename) 
         except: # If an error from the above statement, break and restart the loop with the next filename.
+            collection.update_one({'_id': document['_id']}, {'$set': {'fileLink': 'None'}})
             logging.warning(f"No fileLink found for document ID {document['_id']} in collection {collection_name}") # Break and restart the loop with the next filename.
-            break
+            continue
+            
+        if base_path not in new_path: # Catches the occasions where the 'new path' is just the name of a file directory due to improper excel input.
+            collection.update_one({'_id': document['_id']}, {'$set': {'fileLink': 'None'}})
+            logging.warning(f"No fileLink found for document ID {document['_id']} in collection {collection_name}") # Break and restart the loop with the next filename.
+            continue
 
         if ('.' not in os.path.split(new_path)[-1]): # Splits the proposed new path by the slashes, if the last one does not have a '.' (which also means no file extension), break.
+            collection.update_one({'_id': document['_id']}, {'$set': {'fileLink': 'None'}})
             logging.warning(f"No fileLink found for document ID {document['_id']} in collection {collection_name}")
-            break
+            continue
 
         try: # After passing all the above checks, program is allowed to replace the file path with the proposed file path. 
             collection.update_one({'_id': document['_id']}, {'$set': {'fileLink': new_path}})
             logging.info(f"Updated fileLink for document ID {document['_id']} in collection {collection_name} to {new_path}")
 
         except Exception as e: # To catch any other errors, for now. 
+            collection.update_one({'_id': document['_id']}, {'$set': {'fileLink': 'None'}})
             logging.error(f"Failed to update document ID {document['_id']} in collection {collection_name}: {e}")
 
 # Close the connection to MongoDB

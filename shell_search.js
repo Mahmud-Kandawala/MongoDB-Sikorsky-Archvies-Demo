@@ -32,11 +32,11 @@ db["T01.36 Posters"].find({$or: [
 
 
  // which Filters the documents to pass only those that match the specified condition.
-db['16mm_Films'].aggregate([{ $match: { aircraftModel: "S-76" } }]).pretty();
+db['T01.01 16mm_Films'].aggregate([{ $match: { names: "Anonymous" } }]).pretty();
 
 
 // Documents Grouped by YearExtract the year from the date field and group documents by year.
-db["T01.09_Flat_Documents"].aggregate([
+db["T01.09 Flat_Documents"].aggregate([
   { $addFields: { year: { $substr: ["$date", 6, 4] } } },
   { $group: { _id: "$year", count: { $sum: 1 } } }
 ]).pretty();

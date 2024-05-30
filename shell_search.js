@@ -17,7 +17,7 @@ db.collection_name.find({ field: { $type: "string" } }).pretty();
 //  Some Find Queries
 
 //Case-sensitive version of searching through collection 
-- db["T01.36 Posters"].find({ description: { $regex: "B&W" } }).pretty();
+- db["T01.01 16mm_Films"].find({ description: { $regex: "B&W" } }).pretty();
 
 // If you want to search in multiple fields, you can use the $or operator: ( Case-INSENSITIVE Matching
 db["T01.36 Posters"].find({$or: [
